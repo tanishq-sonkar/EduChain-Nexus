@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery System - Make a Request</title>
+    <style>
+        :root {
+            --color-dark-blue: #6482AD;
+            --color-blue: #7FA1C3;
+            --color-light-gray: #E2DAD6;
+            --color-off-white: #F5EDED;
+        }
+        body, html {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            color: var(--color-dark-blue);
+        }
+        .gradient-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--color-dark-blue), var(--color-blue), var(--color-light-gray), var(--color-off-white));
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            z-index: -1;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: var(--color-dark-blue);
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid var(--color-blue);
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: var(--color-blue);
+            color: var(--color-off-white);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: var(--color-dark-blue);
+        }
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: var(--color-blue);
+            color: var(--color-off-white);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .nav-button:hover {
+            background-color: var(--color-dark-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-background"></div>
+    <div class="container">
+        <h1>Make a Delivery Request</h1>
+        <form id="requestForm">
+            <input type="text" id="itemName" placeholder="Item Name" required>
+            <textarea id="itemDescription" placeholder="Item Description" required></textarea>
+            <input type="text" id="deliveryAddress" placeholder="Delivery Address" required>
+            <input type="submit" value="Submit Request">
+        </form>
+        <a href="index.html" class="nav-button">Back to Home</a>
+    </div>
+    <script>
+        document.getElementById('requestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const itemName = document.getElementById('itemName').value;
+            const itemDescription = document.getElementById('itemDescription').value;
+            const deliveryAddress = document.getElementById('deliveryAddress').value;
+            
+            // Create a new request object
+            const newRequest = {
+                item: itemName,
+                description: itemDescription,
+                address: deliveryAddress
+            };
+            
+            // Get existing requests from localStorage or initialize an empty array
+            let existingRequests = JSON.parse(localStorage.getItem('pendingRequests')) || [];
+            
+            // Add the new request to the array
+            existingRequests.push(newRequest);
+            
+            // Save the updated requests back to localStorage
+            localStorage.setItem('pendingRequests', JSON.stringify(existingRequests));
+            
+            alert('Request submitted successfully!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

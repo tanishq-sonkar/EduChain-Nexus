@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery System - Home</title>
+    <style>
+        :root {
+            --color-dark-blue: #6482AD;
+            --color-blue: #7FA1C3;
+            --color-light-gray: #E2DAD6;
+            --color-off-white: #F5EDED;
+        }
+        body, html {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            color: var(--color-dark-blue);
+        }
+        .gradient-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--color-dark-blue), var(--color-blue), var(--color-light-gray), var(--color-off-white));
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            z-index: -1;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: var(--color-dark-blue);
+        }
+        .nav-buttons {
+            margin-top: 50px;
+        }
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: var(--color-blue);
+            color: var(--color-off-white);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .nav-button:hover {
+            background-color: var(--color-dark-blue);
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-background"></div>
+    <div class="container">
+        <h1>Welcome to the Delivery System</h1>
+        <div class="nav-buttons">
+            <a href="request.html" class="nav-button">Make a Request</a>
+            <a href="pending.html" class="nav-button">View Pending Requests</a>
+        </div>
+    </div>
+</body>
+</html>
