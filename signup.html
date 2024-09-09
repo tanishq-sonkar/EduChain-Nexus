@@ -56,6 +56,13 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+        input[type="email"], input[type="password"] {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
         button[type="submit"] {
             padding: 10px 20px;
             background-color: #5c6bc0;
@@ -99,8 +106,8 @@
         <div id="loginForm" class="form-container">
             <h2>Log In</h2>
             <form onsubmit="return handleLogin(event)">
-                <input type="text" id="'loginUsername'" placeholder="Username" required>
-                <input type="password"id="loginPassword" placeholder="Password" required>
+                <input type="text" id="loginUsername" placeholder="Username" value="" required>
+                <input type="password"id="loginPassword" placeholder="Password" value="" required>
                 <button type="submit">Log In</button>
             </form>
         </div>
@@ -110,7 +117,7 @@
             <form onsubmit="return handleSignup(event)">
                 <input type="text" id="signupUsername" placeholder="Username" required>
                 <input type="password" id="signupPassword" placeholder="Password" required>
-                <input type="text" id="email" placeholder="email" required>
+                <input type="email" id="email" placeholder="Email" required>
                 <button type="submit">Sign Up</button>
             </form>
             <a href="index.html" class="back-link">Back</a>
@@ -124,10 +131,13 @@
 
         function handleLogin(event) {
             event.preventDefault();
+            console.log(event)
             const username = document.getElementById('loginUsername').value;
             const password = document.getElementById('loginPassword').value;
-
-            fetch('/login', {
+            console.log(username)
+            
+            console.log(username,password)
+            fetch('/login', {   
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -138,8 +148,9 @@
             .then(data => {
                 if (data.success) {
                     alert('Login successful!');
-                    document.getElementById('recordsBtn').style.display = 'inline-block';
+                    // document.getElementById('recordsBtn').style.display = 'inline-block';
                     // Redirect or update UI as needed
+                    localStorage.setItem('username', username);
                     window.location.href = 'home.html';
                 } else {
                     alert('Login failed: ' + data.message);
@@ -168,6 +179,7 @@
             .then(data => {
                 if (data.success) {
                     alert('Signup successful! Please log in.');
+                    localStorage.setItem('username', username);
                     window.location.href = 'home.html';
                 } else {
                     alert('Signup failed: ' + data.message);
